@@ -1,18 +1,28 @@
 import Foundation
 
-print("CoreOS v0.0.1")
+print("CoreOS v0.0.2")
 
-print("User: Admin")
+print("Please, enter your Name:")
 
-print("1. Applications")
-print("2. Games")
-print("3. Settings")
-print("4. Information")
-print("5. Shutdown")
+let userName = String(readLine()!)
+
+print("User: \(userName)")
+
+print("Login completed successfully")
+
+func mainMenu() {
+    print("1. Applications")
+    print("2. Games")
+    print("3. Settings")
+    print("4. Information")
+    print("5. Shutdown")
+}
+
+mainMenu()
 
 print("Choose an action:")
 
-var mainMenu = [
+var menuArray = [
     "Applications", 
     "Games",
     "Settings", 
@@ -41,7 +51,7 @@ var inSettings = [
     "Back"
 ]
 
-func number() -> Int {
+func numberHasChosen() -> Int {
     if var choice = Int(readLine()!) {
     return choice
     }
@@ -49,7 +59,7 @@ func number() -> Int {
     return 0
 }
 
-let result = number()
+let result = numberHasChosen()
 
 func showApp() -> Int {
     print("Applications")
@@ -59,10 +69,10 @@ func showApp() -> Int {
     print("4. Back")
     
     if let choice = Int(readLine()!) {
-        return choice
+        while choice == 4 {
+            return 0
+        }
     }
-
-    return 0
 }
 
 func showGames() -> Int {
@@ -73,10 +83,10 @@ func showGames() -> Int {
     print("4. Back")
 
     if let choice = Int(readLine()!) {
-        return choice
+        while choice == 4 {
+            return 0
+        }
     }
-
-    return 0
 }
 
 func showSettings() -> Int {
@@ -86,7 +96,9 @@ func showSettings() -> Int {
     print("4. Back")
 
     if let choice = Int(readLine()!) {
-        return choice
+        while choice == 4 {
+            return 0
+        }
     }
 
     return 0
@@ -99,13 +111,22 @@ func showInfo() {
     let developerName = String(readLine()!) 
 
     print("CoreOS")
-    print("Version: 0.0.1")
+    print("Version: 0.0.2")
     print("Developer: \(developerName)")
     print("Number Of Games: \(inGames.count)")
     print("Number Of Applications: \(inApp.count)")
 }
 
-switch result {
+func activateShutdownButton() {
+    print("System Shutdown...")
+}
+
+while true {
+    mainMenu()
+
+    let result = numberHasChosen()
+    
+    switch result {
     case 1:
     showApp()
     case 2:
@@ -114,7 +135,12 @@ switch result {
     showSettings()
     case 4: 
     showInfo()
+    case 5:
+    activateShutdownButton()
+    break
 
     default:
     print("Unknown command!")
+    }
+
 }
